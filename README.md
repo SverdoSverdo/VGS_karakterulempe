@@ -5,19 +5,19 @@ Contains code used for the report " "
 The scripts are numbered in the order they should be run. Each one sources
 `00_settings.R`
 
-### `00_settings.R`
-
-Sets the working directory and loads all required packages. It also documents the folder structure 
-of your working directory that the other scripts assume: 
-`scripts/`, `data.temp/`, `results/expected_grades/`, `results/models/` and
-`results/plots/`. 
-
 ### `0_fagkode_scraper.R`
 
 Builds the subject-code reference file used throughout the project by scraping
 Udir's fagkode listing API for the studiespesialisering (ST) programme, paging
 through all results. The output is a table of subject titles, fagkoder and the
 standpunkt flag.
+
+### `00_settings.R`
+
+Sets the working directory and loads all required packages. It also documents the folder structure 
+of your working directory that the other scripts assume: 
+`scripts/`, `data.temp/`, `results/expected_grades/`, `results/models/` and
+`results/plots/`. 
 
 ### `01_cleaning.R`
 Cleans the raw grade register: keeps the 2023–2024 cohort, resolves duplicate
