@@ -1,5 +1,6 @@
 # FILE INFORMATION
-Contains code used for the report " "
+Contains code used for the report "Karakterulempen ved å velge realfag: I hvilken grad veier realfagspoengene opp for den?" commissioned by the Norwegian Ministry of Education and Research
+
 
 
 The scripts are numbered in the order they should be run. Each one sources
@@ -15,7 +16,7 @@ standpunkt flag.
 ### `00_settings.R`
 
 Sets the working directory and loads all required packages. It also documents the folder structure 
-of your working directory that the other scripts assume: 
+of your working directory that the other scripts require: 
 `scripts/`, `data.temp/`, `results/expected_grades/`, `results/models/` and
 `results/plots/`. 
 
@@ -56,7 +57,8 @@ values from the choice model to help it converge.
 ### `09_expectedgrades.R`
 Computes the counterfactual grades: for each pupil, the expected grade in every
 subject they did not take, given their observed grades and choices. Also
-Calculates the observed grades. These latter calculations are used in 010_model_comparison.R
+Calculates the observed grades. These latter calculations are used in 010_model_comparison.R.
+The calculations are performed in parallel, and you might want to adjust the number of cores used.
 
 ### `010_model_comparisons.R`
 Checks whether the joint model reproduces the observed subject means better
