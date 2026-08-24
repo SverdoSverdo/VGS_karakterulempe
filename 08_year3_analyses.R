@@ -214,7 +214,7 @@ starting_vals3 <- readRDS("data.temp/StartVals_joint3.rds")
 mod_joint <- mirt(data = items_all, model = spec_3d,
                   itemtype = c(rep("graded", 34), rep("ggum", 11)),
                   method = "EM", SE = T, quadpts = 20,
-                  pars = starting_vals3, # change this with sv_joint to estimate from scratch
+                  pars = starting_vals3, # change this with sv_joint to estimate the non-choice parameters from scratch
                   technical = list(NCYCLES = 10000, MAXQUAD = 40000))
 
 saveRDS(mod_joint, "results/models/mod_joint3.rds")
