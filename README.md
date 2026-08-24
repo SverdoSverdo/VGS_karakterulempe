@@ -32,7 +32,7 @@ The output is the long-format grade file everything downstream builds on.
 ### `02_year1.R`
 Reshapes the VG1 grades to one row per pupil, with a standpunkt and an exam
 column per subject, keeping the most common subjects. Also writes a
-descriptives sheet for the trinn.
+descriptives sheet for VG1.
 
 ### `03_year2.R`
 The same for VG2, keeping the 20 most common subjects and defining which of
@@ -67,7 +67,7 @@ Calculates the observed grades. These latter calculations are used in 010_model_
 The calculations are performed in parallel, and you might want to adjust the number of cores used in the two
 separate functions that calculates grades. 
 
-### `010_model_comparisons.R`
+### `10_model_comparisons.R`
 Checks whether the joint model reproduces the observed subject means better
 than the grade-only model, and writes the comparison for VG2 and VG3.
 
