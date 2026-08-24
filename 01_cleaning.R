@@ -20,7 +20,6 @@ data <- data[data$fagstatus %in% legit_fagstatus,]
 # removing unnecessary columns, keeping termin2 for the post-dedup fill
 gradedf <- data[c("w19_0634_lnr","stp","fagkode","fagstatus","termin2","mun","skr","kar_annen","lnr_org")]
 
-# 50950 duplicated rows to start
 key <- paste(gradedf$w19_0634_lnr, gradedf$fagkode)
 sum(duplicated(key) | duplicated(key, fromLast = TRUE))
 
@@ -30,7 +29,6 @@ is_dup <- duplicated(key) | duplicated(key, fromLast = TRUE)
 has_e <- ave(gradedf$fagstatus == "E", key, FUN = any)
 gradedf <- gradedf[!(is_dup & has_e & gradedf$fagstatus != "E"), ]
 
-# 6971 duplicates left
 key <- paste(gradedf$w19_0634_lnr, gradedf$fagkode)
 sum(duplicated(key) | duplicated(key, fromLast = TRUE))
 
@@ -40,7 +38,7 @@ is_dup <- duplicated(key) | duplicated(key, fromLast = TRUE)
 has_val <- ave(gradedf$stp != "", key, FUN = any)
 gradedf <- gradedf[!(is_dup & has_val & gradedf$stp == ""), ]
 
-# 5129 duplicated rows left. virtually all of these are NA values with fagstatus_kode == S, meaning they have a double registration of them quitting the subject
+# 614 duplicated rows left. virtually all of these are NA values with fagstatus_kode == S, meaning they have a double registration of them quitting the subject
 key <- paste(gradedf$w19_0634_lnr, gradedf$fagkode)
 sum(duplicated(key) | duplicated(key, fromLast = TRUE))
 
@@ -139,7 +137,7 @@ unknown2 <- gradedf[gradedf$program == "unknown2",]
   sort(table(unknown2$fagkode))
   
   
-#People with STUSP2 and 3 are international students I believe. A lot of "IBA...." codes
+#People with STUSP2 and 3 are mostly international students
 STUSP2 <- gradedf[gradedf$program == "STUSP2",]
 sort(table(STUSP2$fagkode))
 
