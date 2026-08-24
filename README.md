@@ -1,17 +1,14 @@
 # FILE INFORMATION
-Contains code used for the report "Karakterulempen ved å velge realfag: I hvilken grad veier realfagspoengene opp for den?" commissioned by the Norwegian Ministry of Education and Research
+Contains code used for the report "Karakterulempen ved å velge realfag: I hvilken grad veier realfagspoengene opp for den?" commissioned by the Norwegian Ministry of Education and Research.
+
+The files StartVals_joint2.rds and StartVals_joint3.rds provide starting values for the more complex models in Year 2 and year 3 that are very computationally demanding.
+The starting values matches that of the final parameter-estimates, and so using them reduces the computational time significantly, although the calculation of standard errors will still take some time.
 
 
-
+All code was run on R version 4.6.1.
 The scripts are numbered in the order they should be run. Each one sources
 `00_settings.R`
 
-### `0_fagkode_scraper.R`
-
-Builds the subject-code reference file used throughout the project by scraping
-Udir's fagkode listing API for the studiespesialisering (ST) programme, paging
-through all results. The output is a table of subject titles, fagkoder and the
-standpunkt flag.
 
 ### `00_settings.R`
 
@@ -19,6 +16,13 @@ Sets the working directory and loads all required packages. It also documents th
 of your working directory that the other scripts require: 
 `scripts/`, `data.temp/`, `results/expected_grades/`, `results/models/` and
 `results/plots/`. 
+
+### `fagkode_scraper.R`
+
+Builds the subject-code reference file used throughout the project by scraping
+Udir's fagkode listing API for the studiespesialisering (ST) programme, paging
+through all results. The output is a table of subject titles, fagkoder and flags
+whether the subject provides a final grade (standpunktkarakter).
 
 ### `01_cleaning.R`
 Cleans the raw grade register: keeps the 2023–2024 cohort, resolves duplicate
@@ -48,17 +52,20 @@ with item fit checks along the way.
 
 ### `07_year2_analyses.R`
 Selects the VG2 item set and fits the grade models, the choice model, and
-finally the joint model that combines them.
+finally the joint model that combines them. Starting values that speeds up estimation
+of the joint mode can be used as instructed in the script.
 
 ### `08_year3_analyses.R`
 The same for VG3. The joint model is larger here, so it is given starting
-values from the choice model to help it converge.
+values from the choice model to help it converge. Starting values that speeds up estimation
+of the joint model can be used as instructed in the script.
 
 ### `09_expectedgrades.R`
 Computes the counterfactual grades: for each pupil, the expected grade in every
 subject they did not take, given their observed grades and choices. Also
 Calculates the observed grades. These latter calculations are used in 010_model_comparison.R.
-The calculations are performed in parallel, and you might want to adjust the number of cores used.
+The calculations are performed in parallel, and you might want to adjust the number of cores used in the two
+separate functions that calculates grades. 
 
 ### `010_model_comparisons.R`
 Checks whether the joint model reproduces the observed subject means better
@@ -69,7 +76,7 @@ Builds the descriptive tables for the report: grade counts, mean standpunkt and
 exam grades per subject, pupils per study programme, and how much pupils cross
 between the two tracks.
 
-### `22_karakterulempe.R`
+### `22_grade_disadvantage.R`
 Produces the subject-level results — observed against expected grades, and the
 karakterulempe of each realfag subject relative to the SSØ average — and saves
 the figures.
