@@ -15,7 +15,7 @@ table(data$fagstatus)
 #we include those with elevstatus (E) and those exemped from grading(F)
 legit_fagstatus <- c("E","F")
 
-data <- data[data$fagstatus %in% legit_fagstatus,] # removing adults
+data <- data[data$fagstatus %in% legit_fagstatus,] 
 
 # removing unnecessary columns, keeping termin2 for the post-dedup fill
 gradedf <- data[c("w19_0634_lnr","stp","fagkode","fagstatus","termin2","mun","skr","kar_annen","lnr_org")]
